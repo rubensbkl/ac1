@@ -21,15 +21,15 @@ module Guia_0101;
     // Definir registradores
     reg [7:0] b1 = 0;
     reg [7:0] b2 = 0;
-    reg [9:0] b3 = 0;
+    reg [15:0] b3 = 0;
     reg [7:0] b4 = 0;
-    reg [8:0] b5 = 0;
+    reg [15:0] b5 = 0;
 
-    // actions
+    // Ações
     initial
     begin : main
         // Identificação
-        $display("Guia_0101 - Conversão de Decimal para Binário");
+        $display("Guia_0101 - Conversão de decimal para binário");
 
         // Atribuir e converter valores
         b1 = x1;
@@ -39,10 +39,10 @@ module Guia_0101;
         b5 = x5;
         
         // Mostrar resultados
-        $display("x1 = %d | b1 = %10b", x1, b1);
-        $display("x2 = %d | b2 = %10b", x2, b2);
-        $display("x3 = %d | b3 = %10b", x3, b3);
-        $display("x4 = %d | b4 = %10b", x4, b4);
-        $display("x5 = %d | b5 = %10b", x5, b5);
+        $display("x1 = %d | b1 = %16b", x1, b1);
+        $display("x2 = %d | b2 = %16b", x2, b2);
+        $display("x3 = %d | b3 = %16b", x3, b3);
+        $display("x4 = %d | b4 = %16b", x4, b4);
+        $display("x5 = %d | b5 = %16b", x5, b5);
     end
 endmodule
