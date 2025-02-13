@@ -5,7 +5,7 @@
  * Curso de Ciencia da Computacao
  * Arquitetura de Computadores I
  *
- * Guia 01 - v1.0 - 08 / 02 / 2025
+ * Guia 01 - v1.0 - 09 / 02 / 2025
  * 855796 - Rubens Dias Bicalho
  *
  */

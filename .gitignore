@@ -1,2 +1,5 @@
-# Ignorar arquivos de compilação do Verilog
+# Verilog
 *.vvp
+
+# Java
+*.class
