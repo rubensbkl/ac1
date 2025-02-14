@@ -104,8 +104,21 @@ public class Guia_01c {
      * @param value - caractere(s) em codigo ASCII
      */
     public static String ASCII2hex(String value) {
-        return ("0");
+        StringBuilder hex = new StringBuilder();
+        for (char c : value.toCharArray()) {
+            hex.append(String.format("%02X ", (int) c)); // Formata como hexadecimal de 2 dígitos
+        }
+        return hex.toString().trim(); // Remove espaço extra no final
     }
+
+    public static String ASCII2bin(String value) {
+        StringBuilder bin = new StringBuilder();
+        for (char c : value.toCharArray()) {
+            bin.append(String.format("%08d ", Integer.parseInt(Integer.toBinaryString(c)))); // Binário de 8 bits
+        }
+        return bin.toString().trim();
+    }
+    
 
     /**
      * Converter valor em hexadecimal para ASCII.
@@ -113,7 +126,61 @@ public class Guia_01c {
      * @param value - hexadecimal equivalente(s)
      */
     public static String hex2ASCII(String value) {
-        return ( "0" );
+        // Remover espaços da string
+        value = value.replaceAll("\\s+", "");
+    
+        // Validar se contém apenas caracteres hexadecimais
+        if (!value.matches("[0-9A-Fa-f]+")) {
+            throw new IllegalArgumentException("A string hexadecimal contém caracteres inválidos.");
+        }
+    
+        // Verificar se o tamanho é par
+        if (value.length() % 2 != 0) {
+            throw new IllegalArgumentException("A string hexadecimal deve ter um número par de caracteres.");
+        }
+    
+        StringBuilder ascii = new StringBuilder();
+        for (int i = 0; i < value.length(); i += 2) {
+            String hexPair = value.substring(i, i + 2);
+            int decimalValue = hexToDecimal(hexPair);
+            ascii.append((char) decimalValue);
+        }
+    
+        return ascii.toString();
+    }
+
+    private static int hexToDecimal(String hex) {
+        int decimal = 0;
+        for (int i = 0; i < hex.length(); i++) {
+            char c = hex.charAt(i);
+            int digitValue = hexCharToDecimal(c);
+            decimal = decimal * 16 + digitValue;
+        }
+        return decimal;
+    }
+
+    private static int hexCharToDecimal(char c) {
+        if (c >= '0' && c <= '9') {
+            return c - '0';
+        } else if (c >= 'A' && c <= 'F') {
+            return c - 'A' + 10;
+        } else if (c >= 'a' && c <= 'f') {
+            return c - 'a' + 10;
+        } else {
+            throw new IllegalArgumentException("Caractere inválido: " + c);
+        }
+    }
+
+    public static String octal2ASCII(String octalString) {
+        StringBuilder ascii = new StringBuilder();
+        String[] octalValues = octalString.split("\\s+"); // Dividir pelos espaços
+    
+        for (String octal : octalValues) {
+            int decimalValue = Integer.parseInt(octal, 8); // Converter de Octal para Decimal
+            ascii.append((char) decimalValue);
+        }
+    
+        return ascii.toString();
     }
 
     /**
@@ -147,12 +214,11 @@ public class Guia_01c {
         test_equals(bin2base("101011", 8), "53");
         test_equals(bin2base("101100", 4), "230");
         System.out.println("4. errorTotalReport = " + test_report());
-        test_equals(ASCII2hex("PUC-Minas"), "50 55 43 2d 4d 69 6e 61 73");
-        test_equals(ASCII2hex("2025-01"), "32 30 32 35 2d 30 31");
-        test_equals(ASCII2hex("Belo Horizonte - M.G."), "01000010 01100101 01101100 01101111 00100000 01001000 01101111 01110010 01101001 01111010 01101111 01101110 01110100 01100101 00100000 00101101 00100000 01001101 00101110 01000111 00101110");
-        // OBS.: A seguir, exemplos apenas para os primeiros, acrescentar todos os outros códigos propostos!
-        test_equals(hex2ASCII("164 ..."), "noite"); // OBS.: 164 e' o primeiro octal (0o164)!
-        test_equals(hex2ASCII("4E ... "), "Manha"); // OBS.: 4E e' o primeiro hexadecimal (0x4E)!
+        test_equals(ASCII2hex("PUC-Minas"), "50 55 43 2D 4D 69 6E 61 73");
+        test_equals(ASCII2hex("2025-01"), "32 30 32 35 2D 30 31");
+        test_equals(ASCII2bin("Belo Horizonte - M.G."), "01000010 01100101 01101100 01101111 00100000 01001000 01101111 01110010 01101001 01111010 01101111 01101110 01110100 01100101 00100000 00101101 00100000 01001101 00101110 01000111 00101110");
+        test_equals(octal2ASCII("156 157 151 164 145"), "noite");
+        test_equals(hex2ASCII("4D 61 6E 68 61"), "Manha");
         System.out.println("5. errorTotalReport = " + test_report());
         System.out.print("\n\nApertar ENTER para terminar.");
         System.console().readLine();
