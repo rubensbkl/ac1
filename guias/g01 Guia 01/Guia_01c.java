@@ -85,7 +85,6 @@ public class Guia_01c {
 
         return result.toString();
     }
-    
 
     /**
      * Converter valor binario para base indicada.
@@ -106,19 +105,18 @@ public class Guia_01c {
     public static String ASCII2hex(String value) {
         StringBuilder hex = new StringBuilder();
         for (char c : value.toCharArray()) {
-            hex.append(String.format("%02X ", (int) c)); // Formata como hexadecimal de 2 dígitos
+            hex.append(String.format("%02X ", (int) c));
         }
-        return hex.toString().trim(); // Remove espaço extra no final
+        return hex.toString().trim();
     }
 
     public static String ASCII2bin(String value) {
         StringBuilder bin = new StringBuilder();
         for (char c : value.toCharArray()) {
-            bin.append(String.format("%08d ", Integer.parseInt(Integer.toBinaryString(c)))); // Binário de 8 bits
+            bin.append(String.format("%08d ", Integer.parseInt(Integer.toBinaryString(c))));
         }
         return bin.toString().trim();
     }
-    
 
     /**
      * Converter valor em hexadecimal para ASCII.
@@ -126,15 +124,12 @@ public class Guia_01c {
      * @param value - hexadecimal equivalente(s)
      */
     public static String hex2ASCII(String value) {
-        // Remover espaços da string
         value = value.replaceAll("\\s+", "");
-    
-        // Validar se contém apenas caracteres hexadecimais
+
         if (!value.matches("[0-9A-Fa-f]+")) {
             throw new IllegalArgumentException("A string hexadecimal contém caracteres inválidos.");
         }
-    
-        // Verificar se o tamanho é par
+
         if (value.length() % 2 != 0) {
             throw new IllegalArgumentException("A string hexadecimal deve ter um número par de caracteres.");
         }
@@ -173,10 +168,10 @@ public class Guia_01c {
 
     public static String octal2ASCII(String octalString) {
         StringBuilder ascii = new StringBuilder();
-        String[] octalValues = octalString.split("\\s+"); // Dividir pelos espaços
+        String[] octalValues = octalString.split("\\s+");
     
         for (String octal : octalValues) {
-            int decimalValue = Integer.parseInt(octal, 8); // Converter de Octal para Decimal
+            int decimalValue = Integer.parseInt(octal, 8); 
             ascii.append((char) decimalValue);
         }
     
@@ -186,7 +181,7 @@ public class Guia_01c {
     /**
      * Acao principal.
      */
-    public static void main (String [ ] args) {
+    public static void main (String [] args) {
         System.out.println("Guia_01 - Java");
         System.out.println("855796 - Rubens Dias Bicalho");
         System.out.println();
